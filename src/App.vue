@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h2>Your password is:</h2>
+    <h1>Your password is:</h1>
     <input
       placeholder="Your password will be here"
       type="text"
       v-model="passwordInput"
     />
-    <div style="display: block">
+    <div>
+      <h2>Passowrd length</h2>
+      <input type="number" v-model="passwordLength" />
+      <input type="range" min="1" max="20" step="1" v-model="passwordLength" />
+    </div>
+    <div>
       <input type="checkbox" v-model="checkedSymbols" />
       <label for="checkbox">Use symbols</label>
     </div>
