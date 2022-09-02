@@ -1,28 +1,52 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h2>Your password is:</h2>
+    <input
+      placeholder="Your password will be here"
+      type="text"
+      v-model="passwordInput"
+    />
+    <div style="display: block">
+      <input type="checkbox" v-model="checkedSymbols" />
+      <label for="checkbox">Use symbols</label>
+    </div>
+    <button @click="generatePassword">Generate password</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { chars, symbols } from './api/characters';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      passwordInput: '',
+      passwordLength: 8,
+      checkedSymbols: false,
+      generatedPassword: '',
+      setChars: chars,
+    };
+  },
+  methods: {
+    generatePassword() {
+      this.passwordInput = '';
+      this.generatedPassword = '';
+
+      if (this.checkedSymbols) {
+        this.setChars = chars.concat(symbols);
+      } else {
+        this.setChars = chars;
+      }
+
+      for (let i = 0; i < this.passwordLength; i++) {
+        let randomChar = Math.floor(Math.random() * this.setChars.length);
+        this.generatedPassword += this.setChars[randomChar];
+      }
+      this.passwordInput = this.generatedPassword;
+    },
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
