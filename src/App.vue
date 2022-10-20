@@ -14,7 +14,7 @@
           v-on:focus="$event.target.select()"
           ref="myinput"
           readonly
-          class="bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm block w-full p-2 sm:p-5 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm block w-full p-2 sm:p-5 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white focus:outline-none"
         />
         <button
           @click="copy"
