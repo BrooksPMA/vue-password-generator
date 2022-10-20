@@ -3,10 +3,10 @@
     <div
       class="p-4 w-full max-w-sm bg-white rounded-lg border border-gray-200 shadow-2xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
     >
-      <h5 class="text-3xl font-medium text-gray-900 dark:text-white">
+      <h5 class="sm:text-3xl font-medium text-gray-900 dark:text-white">
         Password Generator
       </h5>
-      <div class="mt-8 relative w-full">
+      <div class="sm:mt-8 relative w-full">
         <input
           placeholder="CLICK GENERATE"
           type="text"
@@ -14,11 +14,11 @@
           v-on:focus="$event.target.select()"
           ref="myinput"
           readonly
-          class="bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm block w-full p-5 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm block w-full p-2 sm:p-5 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
         />
         <button
           @click="copy"
-          class="absolute top-0 right-0 p-5 text-sm rounded text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-500"
+          class="absolute top-0 right-0 p-2 sm:p-5 text-sm rounded text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-500"
         >
           <svg
             class="w-auto h-5"
@@ -40,10 +40,12 @@
       <div class="mt-4">
         <h1 class="flex pl-2 text-xs text-gray-400 dark:text-gray-500">
           LENGTH:
-          <p class="pl-1 text-gray-700 dark:text-white">{{ passwordLength }}</p>
+          <p class="pl-1 text-gray-700 dark:text-white">
+            {{ passwordLength }}
+          </p>
         </h1>
         <div
-          class="flex items-center bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="flex items-center bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-2 sm:p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
         >
           <p class="pr-3">4</p>
           <input
@@ -62,7 +64,7 @@
           SETTINGS
         </h1>
         <div
-          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-2 sm:p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
           @click="includeLowercase = !includeLowercase"
         >
           <input
@@ -77,7 +79,7 @@
           >
         </div>
         <div
-          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-2 sm:p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
           @click="includeUppercase = !includeUppercase"
         >
           <input
@@ -92,7 +94,7 @@
           >
         </div>
         <div
-          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-2 sm:p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
           @click="includeNumbers = !includeNumbers"
         >
           <input
@@ -107,7 +109,7 @@
           >
         </div>
         <div
-          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-2 sm:p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
           @click="includeSymbols = !includeSymbols"
         >
           <input
@@ -125,7 +127,7 @@
       <button
         @click="generatePassword"
         type="button"
-        class="text-white bg-gradient-to-br from-purple-300 to-blue-400 dark:from-purple-600 dark:to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-5 mt-5 text-center w-full disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:bg-gradient-to-br"
+        class="text-white bg-gradient-to-br from-purple-300 to-blue-400 dark:from-purple-600 dark:to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-2 py-5 mt-2 sm:px-5 sm:py-5 sm:mt-5 text-center w-full disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:bg-gradient-to-br"
         :disabled="disabledButton"
       >
         GENERATE PASSWORD
