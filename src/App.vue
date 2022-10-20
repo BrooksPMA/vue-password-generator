@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center h-screen font-sans font-medium">
     <div
-      class="p-4 w-full max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+      class="p-4 w-full max-w-sm bg-white rounded-lg border border-gray-200 shadow-2xl sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
     >
       <h5 class="text-3xl font-medium text-gray-900 dark:text-white">
         Password Generator
@@ -18,7 +18,7 @@
         />
         <button
           @click="copy"
-          class="absolute top-0 right-0 p-5 text-sm rounded text-white bg-blue-800 border-blue-800 hover:bg-blue-900 dark:bg-blue-800 dark:hover:bg-blue-900"
+          class="absolute top-0 right-0 p-5 text-sm rounded text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-500"
         >
           <svg
             class="w-auto h-5"
@@ -61,6 +61,21 @@
         <h1 class="flex pl-2 text-xs text-gray-400 dark:text-gray-500">
           SETTINGS
         </h1>
+        <div
+          class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
+          @click="includeLowercase = !includeLowercase"
+        >
+          <input
+            type="checkbox"
+            class="w-4 h-4 text-blue-900 bg-gray-100 rounded border-gray-300 focus:ring-blue-800 dark:focus:ring-blue-900 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+            v-model="includeLowercase"
+          />
+          <label
+            for="checkbox"
+            class="ml-2 text-lg font-normal text-gray-900 dark:text-gray-400"
+            >Include Lowercase</label
+          >
+        </div>
         <div
           class="flex items-center mb-2 bg-gray-200 border-none border-gray-300 rounded text-gray-900 text-sm w-full p-3 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 placeholder:text-center dark:text-white dark:focus:outline-none"
           @click="includeUppercase = !includeUppercase"
@@ -110,7 +125,8 @@
       <button
         @click="generatePassword"
         type="button"
-        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-5 mt-5 text-center w-full"
+        class="text-white bg-gradient-to-br from-purple-300 to-blue-400 dark:from-purple-600 dark:to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-5 mt-5 text-center w-full disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:bg-gradient-to-br"
+        :disabled="disabledButton"
       >
         GENERATE PASSWORD
       </button>
@@ -125,30 +141,31 @@ export default {
     return {
       passwordInput: '',
       passwordLength: 8,
+      includeLowercase: true,
       includeUppercase: false,
       includeNumbers: false,
       includeSymbols: false,
-      generatedPassword: '',
-      chars: 'abcdefghijklmnopqrstuvwxyz',
+      chars: '',
+      lowerChars: 'abcdefghijklmnopqrstuvwxyz',
       upperChars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       numbers: '0123456789',
-      symbols: '!@#$%^&*()-=,./;',
+      symbols: '~`!@#$%^&*()_-+={[}]|:;"<,>.?/',
     };
   },
   methods: {
     generatePassword() {
       this.passwordInput = '';
-      this.generatedPassword = '';
+      this.chars = '';
 
+      this.checkboxToggled(this.includeLowercase, this.lowerChars);
       this.checkboxToggled(this.includeUppercase, this.upperChars);
       this.checkboxToggled(this.includeNumbers, this.numbers);
       this.checkboxToggled(this.includeSymbols, this.symbols);
 
       for (let i = 0; i < this.passwordLength; i++) {
         let randomChar = Math.floor(Math.random() * this.chars.length);
-        this.generatedPassword += this.chars[randomChar];
+        this.passwordInput += this.chars[randomChar];
       }
-      this.passwordInput = this.generatedPassword;
     },
     checkboxToggled(checkboxName, typeName) {
       if (checkboxName) {
@@ -158,6 +175,19 @@ export default {
     copy() {
       this.$refs.myinput.focus();
       document.execCommand('copy');
+    },
+  },
+  computed: {
+    disabledButton() {
+      if (
+        !this.includeLowercase &&
+        !this.includeUppercase &&
+        !this.includeNumbers &&
+        !this.includeSymbols
+      ) {
+        return true;
+      }
+      return false;
     },
   },
 };
