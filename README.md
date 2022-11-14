@@ -1,5 +1,7 @@
 # vue-password-generator
 
+Simple password generator made with Vue + tailwind. It has dark and light themes. Enjoy ;)
+
 ## Project setup
 ```
 npm install
